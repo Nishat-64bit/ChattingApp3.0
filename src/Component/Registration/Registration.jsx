@@ -240,7 +240,7 @@ const Registration = () => {
                 />
                 {/* Eye button start */}
                 <div
-                  className="absolute top-[54%] right-[3%] text-dark-blue opacity-30 "
+                  className="absolute top-[54%] right-[3%] text-dark-blue opacity-30 cursor-pointer"
                   onClick={handleEye}
                 >
                   {Eye ? <FaEye /> : <FaEyeSlash />}
