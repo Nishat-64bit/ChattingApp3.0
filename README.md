@@ -34,7 +34,7 @@ in this project I have learned many things
 - loader layout and functionality
 - after successful signup delete data from state and input field
 - sent verification mail using firebase
-- use tostify to show that the mail is sent 
+- use tostify to show that the verification mail link is sent 
 
       
 And Stay with me , Many thing will coming . This is a Big Project . 👁️ Keep Watching 👁️.
