@@ -1,11 +1,22 @@
 import React, { useState } from "react";
 import RegistrationImg from "../../assets/regestration.png";
+import { ToastContainer, toast,Bounce } from 'react-toastify';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
+
 import InputItem from "../../CommonComponet/InputItem";
 import { FaEye } from "react-icons/fa";
 
 import { FaEyeSlash } from "react-icons/fa";
 
 const Registration = () => {
+  //? ============ firebase useState start ================//
+  const auth = getAuth();
+  //? ============ firebase useState end ================//
+
   //? ============ useState start ================//
   const [Email, setEmail] = useState("");
   // console.log(Email);
@@ -14,6 +25,8 @@ const Registration = () => {
   const [Password, setPassword] = useState("");
   //console.log(Password);
   const [Eye, setEye] = useState(false);
+  
+  const [loading,setloading] = useState(false)
 
   //? ============ useState End ================//
   //? ============ Error useState End ================//
@@ -47,14 +60,14 @@ const Registration = () => {
   //* ============ handleEye functionality End ================//
   //* ============ Email regex functionality End ================//
   const EmailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{3}$/;
-  const mail="nishatmahmudur89@gmail.com"
+ // const mail="nishatmahmudur89@gmail.com"
   //console.log(EmailRegex.test(mail));
   //* ============ Email regex functionality End ================//
 
   //* ============ Password regex functionality End ================//
   const PasswordRegex =
     /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&.\-+*/])[A-Za-z\d@$!%*?&.\-+*/]{8,}$/;
-  const word = "SoftwareEngineer75@.com";
+  //const word = "SoftwareEngineer75@.com";
   //console.log(PasswordRegex.test(word));
   //* ============ Password regex functionality End ================//
 
@@ -74,6 +87,10 @@ const Registration = () => {
     }else if (!PasswordRegex.test(Password)){
       setPasswordError("Password Credential Missing Or Wrong ⚠️")
     } else {
+      setloading(true)
+      setEmail('')
+      setFullName('')
+      setPassword('')
       setEmailError("");
       setFullNameError("");
       setPasswordError("");
@@ -83,6 +100,36 @@ const Registration = () => {
   //console.log(EmailError,FullNameError,PasswordError);
   //* ============ handleSignUpBtn functionality Start ================//
 
+  //?============ After Succesful SignUp New user data to firebase functionality Start================//
+  createUserWithEmailAndPassword(auth, Email, Password)
+    .then((userCredential) => {
+      console.log(userCredential);
+      sendEmailVerification(auth.currentUser).then(() => {
+        // use tostify to send alert when mail sent // start
+        toast.success('Email Verification Mail sent', {
+          position: "top-right",
+          autoClose: 10000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+          });
+          // use tostify to send alert when mail sent // end
+        console.log("verification mail sent");
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {
+      setloading(false);
+    });
+
+  //? ============ After Succesful SignUp New user data to firebase functionality End ================//
+
   //! ============ prevent Reload ================//
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -91,6 +138,7 @@ const Registration = () => {
 
   return (
     <>
+    <ToastContainer />
       <div className="flex justify-between items-center">
         <div className="w-1/2  h-fullvh flex justify-center items-center">
           <div>
@@ -113,6 +161,7 @@ const Registration = () => {
                   type="email"
                   name="Email"
                   id="Email"
+                  value={Email}
                   placeholder="Ladushing691@gmail.com"
                   className=" font-Nunito text-xl text-dark-blue font-normal py-4 rounded-lg border-2 border-dark-blue opacity-30 w-full px-5"
                   autoComplete="off"
@@ -146,6 +195,7 @@ const Registration = () => {
                   type="text"
                   name="FullName"
                   id="FullName"
+                  value={FullName}
                   placeholder="Ladushing GTG"
                   className=" font-Nunito text-xl text-dark-blue font-normal py-4 rounded-lg border-2 border-dark-blue opacity-30 w-full px-5"
                   autoComplete="off"
@@ -180,6 +230,7 @@ const Registration = () => {
                   type={Eye ? "text" : "password"}
                   name="Password"
                   id="Password"
+                  value={Password}
                   placeholder="123@asdfg"
                   className=" font-Nunito text-xl text-dark-blue font-normal py-4 rounded-lg border-2 border-dark-blue opacity-30 w-full px-5"
                   autoComplete="off"
@@ -212,15 +263,22 @@ const Registration = () => {
               {/* button start */}
               <button
                 type="submit"
-                className="font-Nunito text-xl bg-[#5F35F5] rounded-[86px] text-white font-normal py-5 w-full mt-7 mb-5"
+                className="font-Nunito text-xl bg-[#5F35F5] rounded-[86px] text-white font-normal py-5 w-full mt-7 mb-5 relative"
                 onClick={handleSignUP}
               >
+               {loading && (
+                 <div>
+                 <div class="loader absolute top-[34%] left-[34%]"></div>
+                 <div class="loader absolute  top-[34%] right-[34%]"></div>
+                 </div>
+               )}
                 Sign up
               </button>
+              
               {/* button end */}
             </form>
 
-            {/* sign in/ Regstration Start */}
+            {/* log in / sign up  */}
             <h4 className="text-center font-OpenSans text-sm text-[#03014C] font-normal ">
               {" "}
               Already have an account?
@@ -228,7 +286,7 @@ const Registration = () => {
                 Sign in
               </span>
             </h4>
-            {/* sign in / Registration End */}
+            {/* log in / sign up  */}
           </div>
         </div>
         <div className="w-1/2  h-fullvh">

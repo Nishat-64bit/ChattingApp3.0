@@ -21,5 +21,20 @@ in this project I have learned many things
 - form validation with 2.password (kew jate weak password na dei )  
 - very important password ==>
 - regex  = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&.\-+*/])[A-Za-z\d@$!%*?&.\-+*/]{8,}$/  copy  
+- install firebase in terminal
+- make folder databaseconfiguration ==> FirebaseConnect.js
+- paste sdk firebaseconnect.js
+- import main.jsx app
+- log firebase 
+- go to firbase doc ==> build
+- sign up for new user => import registration
+- copy firebase hook 
+- make signup for new user. copy from firebase
+- then make a successful sign up inspect chrom
+- loader layout and functionality
+- after successful signup delete data from state and input field
+- sent verification mail using firebase
+- use tostify to show that the mail is sent 
+
       
 And Stay with me , Many thing will coming . This is a Big Project . 👁️ Keep Watching 👁️.
