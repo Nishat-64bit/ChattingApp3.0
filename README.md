@@ -35,7 +35,7 @@ in this project I have learned many things
 - after successful signup delete data from state and input field
 - sent verification mail using firebase
 - use tostify to show that the verification mail link is sent 
-- Make a function and nest them in the regestration into the function .
+- Make a function and nest them (user succesfully fillup input and data goes to firebase) in the regestration func .
 
       
 And Stay with me , Many thing will coming . This is a Big Project . 👁️ Keep Watching 👁️.
