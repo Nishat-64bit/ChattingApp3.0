@@ -27,6 +27,7 @@ const Registration = () => {
   const [Eye, setEye] = useState(false);
   
   const [loading,setloading] = useState(false)
+  const [regestration,setRegestration]= useState('')
 
   //? ============ useState End ================//
   //? ============ Error useState End ================//
@@ -71,8 +72,10 @@ const Registration = () => {
   //console.log(PasswordRegex.test(word));
   //* ============ Password regex functionality End ================//
 
-  //* ============ handleSignUpBtn functionality Start ================//
-  const handleSignUP = () => {
+  // regestration Functionality
+  const handleRegestration = ()=>{
+    //* ============ // user input dibe // functionality Start ================//
+    
     if (!Email) {
       setEmailError("Email Credential Missing Or Wrong ⚠️");
     } else if (!EmailRegex.test(Email)) {
@@ -96,39 +99,55 @@ const Registration = () => {
       setPasswordError("");
       //console.log("everything is oke");
     }
-  };
-  //console.log(EmailError,FullNameError,PasswordError);
-  //* ============ handleSignUpBtn functionality Start ================//
+    
+     //* ============// user input dibe // functionality End ================//
 
-  //?============ After Succesful SignUp New user data to firebase functionality Start================//
+  //?======= User suceesfully input field jodi fill up kore then firebase functionality Start========//
   createUserWithEmailAndPassword(auth, Email, Password)
-    .then((userCredential) => {
-      console.log(userCredential);
-      sendEmailVerification(auth.currentUser).then(() => {
-        // use tostify to send alert when mail sent // start
-        toast.success('Email Verification Mail sent', {
-          position: "top-right",
-          autoClose: 10000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-          transition: Bounce,
-          });
-          // use tostify to send alert when mail sent // end
-        console.log("verification mail sent");
-      });
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-    .finally(() => {
-      setloading(false);
+  .then((userCredential) => {
+    console.log(userCredential);
+    sendEmailVerification(auth.currentUser).then(() => {
+      setloading(false)
+      // use tostify to send alert when mail sent // start
+      toast.success('Email Verification Mail sent', {
+        position: "top-right",
+        autoClose: 10000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+        });
+        // use tostify to send alert when mail sent // end
+      console.log("verification mail sent");
     });
+  })
+  .catch((error) => {
+    setloading(false)
+    if(error.message === "Firebase: Error (auth/email-already-in-use)."){
+      toast.success('Email Already In Use', {
+        position: "top-right",
+        autoClose: 10000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+        });
+    }
+  })
+  .finally(() => {
+    setloading(false);
+  });
 
-  //? ============ After Succesful SignUp New user data to firebase functionality End ================//
+//? ============ After Succesful SignUp New user data to firebase functionality End ================//
+  }
+
+
 
   //! ============ prevent Reload ================//
   const handleSubmit = (event) => {
@@ -264,7 +283,7 @@ const Registration = () => {
               <button
                 type="submit"
                 className="font-Nunito text-xl bg-[#5F35F5] rounded-[86px] text-white font-normal py-5 w-full mt-7 mb-5 relative"
-                onClick={handleSignUP}
+                onClick={handleRegestration}
               >
                {loading && (
                  <div>
