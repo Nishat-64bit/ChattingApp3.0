@@ -35,7 +35,11 @@ in this project I have learned many things
 - after successful signup delete data from state and input field
 - sent verification mail using firebase
 - use tostify to show that the verification mail link is sent 
-- Make a function and nest them (user succesfully fillup input and data goes to firebase) in the regestration func .
+- use a function when use successfully input all field and successfully this data goes to firebase use all things in a function when sign up or regestration btn click it.
+- make a pages folder under src and make file name regestrationPages then import the component named regestration . so now the main pages is regestrationpages , now import it to the app.jsx and remove the older one named regestration component . 
+
+- oke now we make login page , so make login folder under component and make file login.jsx and import it to the login page and import login page to the app.jsx file 
+- so now we have multiple pages , so how should we navigate them ==> React Router Dom ==> next class
 
       
 And Stay with me , Many thing will coming . This is a Big Project . 👁️ Keep Watching 👁️.

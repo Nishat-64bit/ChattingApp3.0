@@ -127,7 +127,7 @@ const Registration = () => {
   .catch((error) => {
     setloading(false)
     if(error.message === "Firebase: Error (auth/email-already-in-use)."){
-      toast.success('Email Already In Use', {
+      toast.warn('Email Already In Use', {
         position: "top-right",
         autoClose: 10000,
         hideProgressBar: false,

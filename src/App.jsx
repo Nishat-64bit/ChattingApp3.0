@@ -1,10 +1,11 @@
 import React from 'react'
-import Registration from './Component/Registration/Registration'
-
+import RegestrationPages from './Pages/RegestrationPages'
+import LoginPages from './Pages/LoginPages'
 const App = () => {
   return (
     <div>
-      <Registration/>
+      <RegestrationPages/>
+      <LoginPages/>
     </div>
   )
 }
