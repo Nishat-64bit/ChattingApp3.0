@@ -111,5 +111,10 @@ in this project I have learned many things
   -- oke aeta return er div er bitore pass koren 
   -- now email verified page design koren img hisebe {gif nen} and text nen : sob center e hobe main div
   -- and btn nen ==> btn e link koren gmail inbox ke react link dea and target{_blank}
+  -- ekon email jodi verified na hoi tahole btn theke email e click korle inbox e nea jacce ,,
+  -- ekon email verified holo, kintu email je verfied holo seta to homepage ke janate hobe
+  -- mane home page jokon janbe email verified tokon se homepage e dokte dibe
+  -- seta korar jonno homepage er useeffect hook er dependeci [userinfo.emailverified] chole jaba
+  -- now aebar kaj holo homepage er design er
 
 And Stay with me , Many thing will coming . This is a Big Project . 👁️ Keep Watching 👁️.

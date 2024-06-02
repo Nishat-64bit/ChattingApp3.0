@@ -35,7 +35,7 @@ const Homepage = () => {
       // setdisplayName(user.displayName);
       // setEmail(user.email);
     });
-  }, []);
+  }, [userInfo.Emailverified]);
   // *======================== useeffect Hook : reload er age sob check start  ========================//
   return (
     <div>
