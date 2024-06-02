@@ -101,5 +101,15 @@ in this project I have learned many things
   - Usenavigate hook to navigate router to router (page to page) and use navigate = usenavigate()
   -but ami cie reg theke login e navigate korte 3s somoy lage aar ae somoy e tostify ta dakak
   - just navigate('/login') ke settimeout function e den aetar time 3000s , tostify autoclose : 2000 den
-  - 
+  - - user verify link e na click kore o home page e chole jacce ta kora jabe na 
+  - jodi tar verify kora na hoi tobe take email verify korate hobe 
+  - aejonno amke chole jete hobe firebase er currently signed in user e to home page asve tai na
+  - useeffect() hook use korte hobe ==> [reload hoaar agger check korbe user sokol info thik babe dise kina]
+  -- aejonno firebase get a user provided specific info te chole jabo ==> home page
+  -- and then usestate nesting hook nite hobe sob info er jonno 
+  -- and jodi emailverified hoi tahole seta true dekabe and false hole emailverified page e nea jabe
+  -- oke aeta return er div er bitore pass koren 
+  -- now email verified page design koren img hisebe {gif nen} and text nen : sob center e hobe main div
+  -- and btn nen ==> btn e link koren gmail inbox ke react link dea and target{_blank}
+
 And Stay with me , Many thing will coming . This is a Big Project . 👁️ Keep Watching 👁️.
