@@ -2,13 +2,25 @@ import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "firebase/auth";
+
 const LoginLeft = () => {
   //* ============= useState Hook Start ================//
   //? firebase hook //
   const auth = getAuth();
-  
+
+  //? google hook
+  const provider = new GoogleAuthProvider();
+
+  //? routing page to page : useNavgigatehook
+  const navigate = useNavigate();
+
   // ? eye state //
   const [eye, seteye] = useState(false);
 
@@ -18,7 +30,7 @@ const LoginLeft = () => {
     Password: "",
   });
   //? loading state //
-  const [loading,setloading] = useState(false)
+  const [loading, setloading] = useState(false);
 
   //* ============= useState Hook End ================//
 
@@ -54,57 +66,98 @@ const LoginLeft = () => {
     //console.log(event.target.id); //1st e aage aeta korba then setinput value dea start korba
   };
   //? ============= HandleInputField functionality End ================///
-   //* ============// user input dibe // functionality Start ================//
-  
+
+  //* ============// user input dibe // functionality Start ================//
+
   const handleLogIn = () => {
     if (!inputValue.Email) {
       setError({
         ...Error,
-        EmailError : "Email Credential Missing Or Wrong ⚠️"
+        EmailError: "Email Credential Missing Or Wrong ⚠️",
       });
-    }else if (!EmailRegex.test(inputValue.Email)){
+    } else if (!EmailRegex.test(inputValue.Email)) {
       setError({
         ...Error,
-        EmailError : "Email Credential Missing Or Wrong ⚠️'"
+        EmailError: "Email Credential Missing Or Wrong ⚠️'",
       });
-    }else if (!inputValue.Password){
+    } else if (!inputValue.Password) {
       setError({
         ...Error,
-        PasswordError : "Password Credential Missing Or Wrong ⚠️"
+        EmailError: "",
       });
-    }else if (!PasswordRegex.test(inputValue.Password)){
       setError({
         ...Error,
-        PasswordError : "Password Credential Missing Or Wrong ⚠️'"
+        PasswordError: "Password Credential Missing Or Wrong ⚠️",
       });
-    }else{
-      setloading(true)
+    } else if (!PasswordRegex.test(inputValue.Password)) {
+      setError({
+        ...Error,
+        EmailError: "",
+      });
+      setError({
+        ...Error,
+        PasswordError: "Password Credential Missing Or Wrong ⚠️'",
+      });
+    } else {
+      // ? user jodi input thik babe dei tar reg er moto taile ==>
+      //console.log("everything is oke");
+      setloading(true);
       setinputValue({
         Email: "",
         Password: "",
-      })
+      });
       setError({
         EmailError: "",
         PasswordError: "",
-      })
-      //console.log("everything is oke");
+      });
       //?======= User jodi registration kora mail and pass dei then seta jabe firebase e start ========//
-      signInWithEmailAndPassword(auth,inputValue.Email,inputValue.Password).then((userinfo)=>{
-        console.log(userinfo);
-      }).catch((error)=>{
-        console.log(error.message);
-      }).finally(()=>{
-        setloading(false)
-      })
-     //?======= User jodi registration kora mail and pass dei then seta jabe firebase e start ========//
-  
+      signInWithEmailAndPassword(auth, inputValue.Email, inputValue.Password)
+        .then((userinfo) => {
+          localStorage.setItem(
+            "userTokenNishat",
+            userinfo._tokenResponse.idToken
+          );
+          navigate("/home");
+          //console.log(userinfo._tokenResponse.idToken);
+          //idtoken is very much imp
+        })
+        .catch((error) => {
+          console.log(error.message);
+        })
+        .finally(() => {
+          setloading(false);
+        });
+      //?======= User jodi registration kora mail and pass dei then seta jabe firebase e start ========//
     }
-    
   };
-  //* ============// user input dibe // functionality End ================//
-  
+  //*======= handle with Google functionality start ========//
+  const handleLoginWithGoogle = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        const user = result.user;
+        //console.log(user,credential);
+        navigate("/home");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
 
-  //?======= User suceesfully input field jodi fill up kore then firebase functionality Start========//
+  // ? optional way  :  aysnc dia kibabe korbo
+  //   const handleLoginWithGoogle = async ()=>{
+  //     try{
+  //       const result = await signInWithPopup(auth, provider)
+  //       const credential = GoogleAuthProvider.credentialFromResult(result);
+  //       const token = credential.accessToken;
+  //       const user = result.user;
+  //       console.log(user,credential )
+  //    }catch(error){
+  //     console.log(error.message);
+  //    }
+  //  }
+  //*======= handle with Google functionality End ========//
 
   //? ============= prevent Reload functionality Start ================//
   const handleSubmit = (event) => {
@@ -120,7 +173,10 @@ const LoginLeft = () => {
         </h1>
 
         {/* google layout start */}
-        <div className="flex justify-center items-center w-[200px] gap-2 py-4 border-2 border-[rgba(3,1,76,0.3)] rounded-lg mb-8">
+        <div
+          className="flex justify-center items-center w-[200px] gap-2 py-4 border-2 border-[rgba(3,1,76,0.3)] rounded-lg mb-8 cursor-pointer"
+          onClick={handleLoginWithGoogle}
+        >
           <span className=" text-xl">
             <FcGoogle />
           </span>
@@ -151,16 +207,14 @@ const LoginLeft = () => {
               // ============ handleEmail functionality start ================//
               onChange={HandleInputField}
               // ============ handleEmail functionality End ================//
-
-              
             />
-            {/* EmailError Start & its functionality start */} 
+            {/* EmailError Start & its functionality start */}
             {Error.EmailError && ( // object er key dorte objectname.key bolte hoi
               <div>
-              <span className="font-Nunito text-sm text-red-600 font-normal">
-                {Error.EmailError}
-              </span>
-            </div>
+                <span className="font-Nunito text-sm text-red-600 font-normal">
+                  {Error.EmailError}
+                </span>
+              </div>
             )}
             {/* EmailError Start & its functionality start */}
 
@@ -186,7 +240,6 @@ const LoginLeft = () => {
               // ============ handlePassword functionality start ================//
               onChange={HandleInputField}
               // ============ handlePassword functionality End ================//
-              
             />
 
             {/* Eye button start */}
@@ -197,17 +250,16 @@ const LoginLeft = () => {
               {eye ? <FaEye /> : <FaEyeSlash />}
             </div>
             {/* Eye button End */}
-
           </div>
           {/* PasswordError functionality start */}
           {Error.PasswordError && (
-              <div>
+            <div>
               <span className="font-Nunito text-sm text-red-600 font-normal">
                 {Error.PasswordError}
               </span>
             </div>
-            )}
-            {/* PasswordError Start & its functionality start */}
+          )}
+          {/* PasswordError Start & its functionality start */}
           {/* PasswordInput End */}
 
           {/* button start */}
@@ -218,14 +270,13 @@ const LoginLeft = () => {
             // onClick={handleRegestration}
           >
             {/* loading start */}
-          {loading && (
-             <div>
-             <div class="loader absolute top-[28%] left-[17%]"></div>
-             <div class="loader absolute  top-[28%] right-[17%]"></div>
-             </div>
-          )}
-          {/* loading end */}
-
+            {loading && (
+              <div>
+                <div class="loader absolute top-[28%] left-[17%]"></div>
+                <div class="loader absolute  top-[28%] right-[17%]"></div>
+              </div>
+            )}
+            {/* loading end */}
             Login to Continue
           </button>
 

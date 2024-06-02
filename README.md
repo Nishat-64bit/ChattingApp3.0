@@ -60,6 +60,46 @@ in this project I have learned many things
 - error Always baire rakba  all input div er
 - next connect firebase when user sucessfully give all data 
 - go to firebase signed in existing user
+- local storage e id token rakbo kibabe 
+- aebar google auth er kaj - div ta te onclick = {handleLoginWithGoogle}
+- remember   const provider = new GoogleAuthProvider(); and google jodi firebase e enable na koren taile kintu kaj korbe na
 
-      
+
+                
+                //? firebase hook //
+                const auth = getAuth();
+
+                // google hook
+                const provider = new GoogleAuthProvider();
+                
+                // promise dia korlam google popup with sign in //
+                const handleLoginWithGoogle = ()=>{
+                signInWithPopup(auth, provider).then((result)=>{
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken;
+                const user = result.user;
+                //console.log(user,credential);
+                }).catch((error)=>{
+                console.log(error.message);
+                })
+            }
+                 // async dia korlam google popup with sign in //
+                 // ? optional way  :  aysnc dia kibabe korbo ?
+                //   const handleLoginWithGoogle = async ()=>{
+                //     try{
+                //       const result = await signInWithPopup(auth, provider)
+                //       const credential = GoogleAuthProvider.credentialFromResult(result);
+                //       const token = credential.accessToken;
+                //       const user = result.user;
+                //       console.log(user,credential )
+                //    }catch(error){
+                //     console.log(error.message);
+                //    }
+                //  }
+
+  - now create home page when user succesfully login go to home page
+  - Usenavigate hook to navigate router to router (page to page) and use navigate = usenavigate()
+  -but ami cie reg theke login e navigate korte 3s somoy lage aar ae somoy e tostify ta dakak
+  - just navigate('/login') ke settimeout function e den aetar time 3000s , tostify autoclose : 2000 den
+  - 
 And Stay with me , Many thing will coming . This is a Big Project . 👁️ Keep Watching 👁️.

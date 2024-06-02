@@ -6,7 +6,7 @@ import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
 } from "firebase/auth";
-import { Link } from "react-router-dom";
+import { Link,useNavigate} from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 
 import { FaEyeSlash } from "react-icons/fa";
@@ -15,6 +15,9 @@ const Registration = () => {
   //? ============ firebase useState start ================//
   const auth = getAuth();
   //? ============ firebase useState end ================//
+  
+  //? routing page to page : useNavgigatehook
+  const navigate = useNavigate();
 
   //? ============ useState start ================//
   const [Email, setEmail] = useState("");
@@ -104,13 +107,13 @@ const Registration = () => {
   //?======= User suceesfully input field jodi fill up kore then firebase functionality Start========//
   createUserWithEmailAndPassword(auth, Email, Password)
   .then((userCredential) => {
-    console.log(userCredential);
+    //console.log(userCredential);
     sendEmailVerification(auth.currentUser).then(() => {
       setloading(false)
       // use tostify to send alert when mail sent // start
       toast.success('Email Verification Mail sent', {
         position: "top-right",
-        autoClose: 10000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -120,7 +123,10 @@ const Registration = () => {
         transition: Bounce,
         });
         // use tostify to send alert when mail sent // end
-      console.log("verification mail sent");
+      //console.log("verification mail sent");
+     setTimeout(() => {
+      navigate('/login')
+     }, 3000);
     });
   })
   .catch((error) => {
