@@ -1,12 +1,29 @@
 import React from 'react'
 import RegestrationPages from './Pages/RegestrationPages'
-import LoginPages from './Pages/LoginPages'
+import LoginPages from './Pages/LoginPages';
+
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <>
+    <Route path='/' element={<RegestrationPages/>}/>  {/* add to root RegestrationPages */}
+    <Route path='reg' element={<RegestrationPages/>}/>
+    <Route path='log' element={<LoginPages/>}/>
+    <Route path='*' element = {<h1>Error page</h1>}/>
+    {/* suppose  jodi amr contact page na theke tar por navigate korle Erro page leka  dekabe  */}
+    </>
+  )
+)
+
+
 const App = () => {
   return (
-    <div>
-      <RegestrationPages/>
-      <LoginPages/>
-    </div>
+    <RouterProvider router={router}> </RouterProvider>
   )
 }
 

@@ -40,6 +40,26 @@ in this project I have learned many things
 
 - oke now we make login page , so make login folder under component and make file login.jsx and import it to the login page and import login page to the app.jsx file 
 - so now we have multiple pages , so how should we navigate them ==> React Router Dom ==> next class
+- first install npm of react router dom 
+- then configure react router dom frm react router dom utilities ==> createRouteFromElements
+- make layout of login page 
+- make eyebtn functionality
+- make useState Nesting format for all input like email,password,fullname
+- industry level e kaj hoi erokom e ekta state dorba . function niba . event nibe target korba . id nibe = value te assign koba ses. 
+
+        const HandleInputField =(event)=>{
+        setinputValue({
+            ...inputValue,
+            [event.target.id] : event.target.value // ja input e lekba ta tar value
+            // ja dicci ta new value [Email] = "nishat@gmail.com" aeta newly set hocce set e ==> input e
+            //[Password] : nishat745
+        })
+        }
+- generic massage for password error and email error
+- Email Credential Missing Or Wrong ⚠️ / Password Credential Missing Or Wrong ⚠️
+- error Always baire rakba  all input div er
+- next connect firebase when user sucessfully give all data 
+- go to firebase signed in existing user
 
       
 And Stay with me , Many thing will coming . This is a Big Project . 👁️ Keep Watching 👁️.

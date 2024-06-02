@@ -6,8 +6,7 @@ import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
 } from "firebase/auth";
-
-import InputItem from "../../CommonComponet/InputItem";
+import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 
 import { FaEyeSlash } from "react-icons/fa";
@@ -282,7 +281,7 @@ const Registration = () => {
               {/* button start */}
               <button
                 type="submit"
-                className="font-Nunito text-xl bg-[#5F35F5] rounded-[86px] text-white font-normal py-5 w-full mt-7 mb-5 relative"
+                className="font-Nunito text-xl bg-[#5F35F5] rounded-[86px] text-white font-normal py-5 w-full mt-7 mb-3 relative"
                 onClick={handleRegestration}
               >
                {loading && (
@@ -302,7 +301,7 @@ const Registration = () => {
               {" "}
               Already have an account?
               <span className="text-[#EA6C00] cursor-pointer ml-1 hover:underline hover:decoration-[#ea6d00bb]">
-                Sign in
+              <Link to={"/log"}>Sign in</Link>
               </span>
             </h4>
             {/* log in / sign up  */}
