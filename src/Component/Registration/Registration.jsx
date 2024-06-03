@@ -4,7 +4,7 @@ import { ToastContainer, toast,Bounce } from 'react-toastify';
 import {
   getAuth,
   createUserWithEmailAndPassword,
-  sendEmailVerification,
+  sendEmailVerification,updateProfile
 } from "firebase/auth";
 import { Link,useNavigate} from "react-router-dom";
 import { FaEye } from "react-icons/fa";
@@ -122,6 +122,13 @@ const Registration = () => {
         theme: "dark",
         transition: Bounce,
         });
+        updateProfile(auth.currentUser, {
+          displayName: "Jane Q. User", photoURL: "https://example.com/jane-q-user/profile.jpg"
+        }).then(() => {
+          console.log("profile updated");
+          // Profile updated!
+          // ...
+        })
         // use tostify to send alert when mail sent // end
       //console.log("verification mail sent");
      setTimeout(() => {

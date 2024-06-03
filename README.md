@@ -119,7 +119,17 @@ in this project I have learned many things
   -- now aebar kaj holo homepage er design er homeleft and homeright aeta component 2ta home e nen
   - home left e nav ase width newwar dorkar nai just h-90vh naw  and padding x and y naw
 
-  -- oke jodi kono side nav bar 1ta list ke active banate chan tahole just tare ekta active ={"home"} namok props patan then seta doren dore tar class name e mane li class name bolen {active==="home"?"taile design den oke ami cie bg-white hobe taile dekben tarpostion thik thakbo na just width use koren and flex common property use koren bass hoe gelo":"cursor-pointer"}
+  -- oke jodi kono side nav bar 1ta list ke active banate chan tahole just tare ekta active ={"home"} namok props patan then seta doren dore tar class name e mane li class name bolen {active==="home"?"taile design den oke ami cie bg-white hobe taile dekben tarpostion thik thakbo na just width use koren and flex common property use koren bass hoe gelo":"cursor-pointer"} === > next class 
+
+  -- oke ami cie ami je regestration er somoy name dicci ta save hok taile lagbe realtime database
+  -- go to firebase realtime database - web - firebaseconnect file e == import { getDatabase } from "firebase/database";
+  and export const database = getDatabase(app);
+  and now connect main firebase console realtime database
+
+  -- oke now regestration page e jokon usersuccesfully signin in korbe then verification mail patabe 
+  -- then username, useremail, password ami cie database e save rakte kibabe ? 
+  -- go to firebase authtication update user profile 
+  -- aeta bosan regestration e karon aekani ami cie user sob dile and mail patanor por data jabe realtime database e ,
   
 
 And Stay with me , Many thing will coming . This is a Big Project . 👁️ Keep Watching 👁️.
