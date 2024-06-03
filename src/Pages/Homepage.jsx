@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import EmailVerified from '../Component/HomeComponent/EmailVerified'
+import EmailVerified from "../Component/HomeComponent/EmailVerified";
+import HomeLeft from "../Component/HomeComponent/HomeLeft/HomeLeft";
+import HomeRight from "../Component/HomeComponent/HomeLeft/HomeRight/HomeRight";
 const Homepage = () => {
   // ? use state hook //
   // const [isEmailVerified, setisEmailVerified] = useState("");
@@ -39,7 +41,17 @@ const Homepage = () => {
   // *======================== useeffect Hook : reload er age sob check start  ========================//
   return (
     <div>
-      {userInfo.Emailverified ? <h2>email verified </h2> : <EmailVerified/>}
+      {userInfo.Emailverified ? (
+        <div className="flex py-4 px-4 ">
+          <HomeLeft active ={"home"}/>
+          <HomeRight />
+        </div>
+      ) : (
+        <EmailVerified
+          email={userInfo.Email}
+          displayName={userInfo.displayName}
+        />
+      )}
     </div>
   );
 };

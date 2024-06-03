@@ -115,6 +115,11 @@ in this project I have learned many things
   -- ekon email verified holo, kintu email je verfied holo seta to homepage ke janate hobe
   -- mane home page jokon janbe email verified tokon se homepage e dokte dibe
   -- seta korar jonno homepage er useeffect hook er dependeci [userinfo.emailverified] chole jaba
-  -- now aebar kaj holo homepage er design er
+  -- oke lastly ami cie email verified page e jokon jabe tokon name and email ta dekak
+  -- now aebar kaj holo homepage er design er homeleft and homeright aeta component 2ta home e nen
+  - home left e nav ase width newwar dorkar nai just h-90vh naw  and padding x and y naw
+
+  -- oke jodi kono side nav bar 1ta list ke active banate chan tahole just tare ekta active ={"home"} namok props patan then seta doren dore tar class name e mane li class name bolen {active==="home"?"taile design den oke ami cie bg-white hobe taile dekben tarpostion thik thakbo na just width use koren and flex common property use koren bass hoe gelo":"cursor-pointer"}
+  
 
 And Stay with me , Many thing will coming . This is a Big Project . 👁️ Keep Watching 👁️.
