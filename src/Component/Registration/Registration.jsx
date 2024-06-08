@@ -1,21 +1,25 @@
 import React, { useState } from "react";
 import RegistrationImg from "../../assets/regestration.png";
-import { ToastContainer, toast,Bounce } from 'react-toastify';
+import { ToastContainer, toast, Bounce } from "react-toastify";
 import {
   getAuth,
   createUserWithEmailAndPassword,
-  sendEmailVerification,updateProfile
+  sendEmailVerification,
+  onAuthStateChanged,
+  updateProfile,
 } from "firebase/auth";
-import { Link,useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 
 import { FaEyeSlash } from "react-icons/fa";
+import { getDatabase, ref, set, push } from "firebase/database";
 
 const Registration = () => {
-  //? ============ firebase useState start ================//
+  //? ============ firebase and database useState start ================//
   const auth = getAuth();
-  //? ============ firebase useState end ================//
-  
+  const db = getDatabase();
+  //? ============ firebase and database useState end ================//
+
   //? routing page to page : useNavgigatehook
   const navigate = useNavigate();
 
@@ -27,9 +31,9 @@ const Registration = () => {
   const [Password, setPassword] = useState("");
   //console.log(Password);
   const [Eye, setEye] = useState(false);
-  
-  const [loading,setloading] = useState(false)
-  const [regestration,setRegestration]= useState('')
+
+  const [loading, setloading] = useState(false);
+  const [regestration, setRegestration] = useState("");
 
   //? ============ useState End ================//
   //? ============ Error useState End ================//
@@ -63,7 +67,7 @@ const Registration = () => {
   //* ============ handleEye functionality End ================//
   //* ============ Email regex functionality End ================//
   const EmailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{3}$/;
- // const mail="nishatmahmudur89@gmail.com"
+  // const mail="nishatmahmudur89@gmail.com"
   //console.log(EmailRegex.test(mail));
   //* ============ Email regex functionality End ================//
 
@@ -75,9 +79,9 @@ const Registration = () => {
   //* ============ Password regex functionality End ================//
 
   // regestration Functionality
-  const handleRegestration = ()=>{
+  const handleRegestration = () => {
     //* ============ // user input dibe // functionality Start ================//
-    
+
     if (!Email) {
       setEmailError("Email Credential Missing Or Wrong ⚠️");
     } else if (!EmailRegex.test(Email)) {
@@ -89,77 +93,93 @@ const Registration = () => {
       setEmailError("");
       setFullNameError("");
       setPasswordError("Password Credential Missing Or Wrong ⚠️");
-    }else if (!PasswordRegex.test(Password)){
-      setPasswordError("Password Credential Missing Or Wrong ⚠️")
+    } else if (!PasswordRegex.test(Password)) {
+      setPasswordError("Password Credential Missing Or Wrong ⚠️");
     } else {
-      setloading(true)
-      setEmail('')
-      setFullName('')
-      setPassword('')
+      setloading(true);
+      setEmail("");
+      setFullName("");
+      setPassword("");
       setEmailError("");
       setFullNameError("");
       setPasswordError("");
       //console.log("everything is oke");
     }
-    
-     //* ============// user input dibe // functionality End ================//
 
-  //?======= User suceesfully input field jodi fill up kore then firebase functionality Start========//
-  createUserWithEmailAndPassword(auth, Email, Password)
-  .then((userCredential) => {
-    //console.log(userCredential);
-    sendEmailVerification(auth.currentUser).then(() => {
-      setloading(false)
-      // use tostify to send alert when mail sent // start
-      toast.success('Email Verification Mail sent', {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
+    //* ============// user input dibe // functionality End ================//
+
+    //?======= User suceesfully input field jodi fill up kore then firebase functionality Start========//
+    createUserWithEmailAndPassword(auth, Email, Password)
+      .then((userCredential) => {
+        //console.log(userCredential);
+        sendEmailVerification(auth.currentUser).then(() => {
+          setloading(false);
+          // use tostify to send alert when mail sent // start
+          toast.success("Email Verification Mail sent", {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Bounce,
+          });
+          // use tostify to send alert when mail sent // end
+          //console.log("verification mail sent");
+
+          // update profile // value gula nilam
+          updateProfile(auth.currentUser, {
+            displayName: FullName,
+            photoURL: null,
+          }).then(() => {
+              //console.log(auth.currentUser);
+              
+              // database e data patacce 
+              let dbref = ref(db, "users/");
+              set(push(dbref), {
+                username: auth.currentUser.displayName,
+                email: auth.currentUser.email,
+                // password : Password // input e value te ja dicilam tai and statehook
+                // password newwa good practise na
+              });
+            }).then(() => {
+              console.log("date send to real time database");
+            }).catch((err)=>{
+              console.log("database write failed");
+            })
+            .catch((error) => {
+              console.log(error.message, "error from update profile");
+            });
+
+          setTimeout(() => {
+            navigate("/login");
+          }, 3000);
         });
-        updateProfile(auth.currentUser, {
-          displayName: "Jane Q. User", photoURL: "https://example.com/jane-q-user/profile.jpg"
-        }).then(() => {
-          console.log("profile updated");
-          // Profile updated!
-          // ...
-        })
-        // use tostify to send alert when mail sent // end
-      //console.log("verification mail sent");
-     setTimeout(() => {
-      navigate('/login')
-     }, 3000);
-    });
-  })
-  .catch((error) => {
-    setloading(false)
-    if(error.message === "Firebase: Error (auth/email-already-in-use)."){
-      toast.warn('Email Already In Use', {
-        position: "top-right",
-        autoClose: 10000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
-        });
-    }
-  })
-  .finally(() => {
-    setloading(false);
-  });
+      })
+      .catch((error) => {
+        setloading(false);
+        if (error.message === "Firebase: Error (auth/email-already-in-use).") {
+          toast.warn("Email Already In Use", {
+            position: "top-right",
+            autoClose: 10000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Bounce,
+          });
+        }
+      })
+      .finally(() => {
+        setloading(false);
+      });
 
-//? ============ After Succesful SignUp New user data to firebase functionality End ================//
-  }
-
-
+    //? ============ After Succesful SignUp New user data to firebase functionality End ================//
+  };
 
   //! ============ prevent Reload ================//
   const handleSubmit = (event) => {
@@ -169,7 +189,7 @@ const Registration = () => {
 
   return (
     <>
-    <ToastContainer />
+      <ToastContainer />
       <div className="flex justify-between items-center">
         <div className="w-1/2  h-fullvh flex justify-center items-center">
           <div>
@@ -297,15 +317,15 @@ const Registration = () => {
                 className="font-Nunito text-xl bg-[#5F35F5] rounded-[86px] text-white font-normal py-5 w-full mt-7 mb-3 relative"
                 onClick={handleRegestration}
               >
-               {loading && (
-                 <div>
-                 <div class="loader absolute top-[34%] left-[34%]"></div>
-                 <div class="loader absolute  top-[34%] right-[34%]"></div>
-                 </div>
-               )}
+                {loading && (
+                  <div>
+                    <div class="loader absolute top-[34%] left-[34%]"></div>
+                    <div class="loader absolute  top-[34%] right-[34%]"></div>
+                  </div>
+                )}
                 Sign up
               </button>
-              
+
               {/* button end */}
             </form>
 
@@ -314,7 +334,7 @@ const Registration = () => {
               {" "}
               Already have an account?
               <span className="text-[#EA6C00] cursor-pointer ml-1 hover:underline hover:decoration-[#ea6d00bb]">
-              <Link to={"/log"}>Sign in</Link>
+                <Link to={"/log"}>Sign in</Link>
               </span>
             </h4>
             {/* log in / sign up  */}

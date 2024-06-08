@@ -1,51 +1,49 @@
-
-
 # 🚀🚀 Chatting App 3.0 🚀🚀
-# React + vite + TailwindCss + FireBase
 
+# React + vite + TailwindCss + FireBase
 
 Hello viewers, This is Actually a ChattingApp based on React,Tailwaind,FireBase.
 in this project I have learned many things
 
 - useState Hook
-- Tailwaind Css 
+- Tailwaind Css
 - FireBase
 - handle event funtionality nesting onchange
 - handle eye funtionality
 - handle signup funtionality - 1.empty signup prevent 2.Error show on browser (span) 3.1ta input er error solve hole next input e gele 1st error chole jabe And Next ==>
 
-- form validation with 1.Email regex (kew jate invaid email na dite pare) 
+- form validation with 1.Email regex (kew jate invaid email na dite pare)
 - very Important email regex // const regex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{3}$/; // copy it 
                     //  const regex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;// alernative
 
-- form validation with 2.password (kew jate weak password na dei )  
+- form validation with 2.password (kew jate weak password na dei )
 - very important password ==>
-- regex  = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&.\-+*/])[A-Za-z\d@$!%*?&.\-+*/]{8,}$/  copy  
+- regex = /^(?=._[A-Z])(?=._[a-z])(?=._\d)(?=._[@$!%*?&.\-+*/])[A-Za-z\d@$!%*?&.\-+*/]{8,}$/ copy
 - install firebase in terminal
 - make folder databaseconfiguration ==> FirebaseConnect.js
 - paste sdk firebaseconnect.js
 - import main.jsx app
-- log firebase 
+- log firebase
 - go to firbase doc ==> build
 - sign up for new user => import registration
-- copy firebase hook 
+- copy firebase hook
 - make signup for new user. copy from firebase
 - then make a successful sign up inspect chrom
 - loader layout and functionality
 - after successful signup delete data from state and input field
 - sent verification mail using firebase
-- use tostify to show that the verification mail link is sent 
+- use tostify to show that the verification mail link is sent
 - use a function when use successfully input all field and successfully this data goes to firebase use all things in a function when sign up or regestration btn click it.
-- make a pages folder under src and make file name regestrationPages then import the component named regestration . so now the main pages is regestrationpages , now import it to the app.jsx and remove the older one named regestration component . 
+- make a pages folder under src and make file name regestrationPages then import the component named regestration . so now the main pages is regestrationpages , now import it to the app.jsx and remove the older one named regestration component .
 
-- oke now we make login page , so make login folder under component and make file login.jsx and import it to the login page and import login page to the app.jsx file 
+- oke now we make login page , so make login folder under component and make file login.jsx and import it to the login page and import login page to the app.jsx file
 - so now we have multiple pages , so how should we navigate them ==> React Router Dom ==> next class
-- first install npm of react router dom 
+- first install npm of react router dom
 - then configure react router dom frm react router dom utilities ==> createRouteFromElements
-- make layout of login page 
+- make layout of login page
 - make eyebtn functionality
 - make useState Nesting format for all input like email,password,fullname
-- industry level e kaj hoi erokom e ekta state dorba . function niba . event nibe target korba . id nibe = value te assign koba ses. 
+- industry level e kaj hoi erokom e ekta state dorba . function niba . event nibe target korba . id nibe = value te assign koba ses.
 
         const HandleInputField =(event)=>{
         setinputValue({
@@ -55,23 +53,22 @@ in this project I have learned many things
             //[Password] : nishat745
         })
         }
+
 - generic massage for password error and email error
 - Email Credential Missing Or Wrong ⚠️ / Password Credential Missing Or Wrong ⚠️
-- error Always baire rakba  all input div er
-- next connect firebase when user sucessfully give all data 
+- error Always baire rakba all input div er
+- next connect firebase when user sucessfully give all data
 - go to firebase signed in existing user
-- local storage e id token rakbo kibabe 
+- local storage e id token rakbo kibabe
 - aebar google auth er kaj - div ta te onclick = {handleLoginWithGoogle}
-- remember   const provider = new GoogleAuthProvider(); and google jodi firebase e enable na koren taile kintu kaj korbe na
+- remember const provider = new GoogleAuthProvider(); and google jodi firebase e enable na koren taile kintu kaj korbe na
 
-
-                
                 //? firebase hook //
                 const auth = getAuth();
 
                 // google hook
                 const provider = new GoogleAuthProvider();
-                
+
                 // promise dia korlam google popup with sign in //
                 const handleLoginWithGoogle = ()=>{
                 signInWithPopup(auth, provider).then((result)=>{
@@ -99,37 +96,102 @@ in this project I have learned many things
 
   - now create home page when user succesfully login go to home page
   - Usenavigate hook to navigate router to router (page to page) and use navigate = usenavigate()
-  -but ami cie reg theke login e navigate korte 3s somoy lage aar ae somoy e tostify ta dakak
+    -but ami cie reg theke login e navigate korte 3s somoy lage aar ae somoy e tostify ta dakak
   - just navigate('/login') ke settimeout function e den aetar time 3000s , tostify autoclose : 2000 den
-  - - user verify link e na click kore o home page e chole jacce ta kora jabe na 
-  - jodi tar verify kora na hoi tobe take email verify korate hobe 
+  - - user verify link e na click kore o home page e chole jacce ta kora jabe na
+  - jodi tar verify kora na hoi tobe take email verify korate hobe
   - aejonno amke chole jete hobe firebase er currently signed in user e to home page asve tai na
   - useeffect() hook use korte hobe ==> [reload hoaar agger check korbe user sokol info thik babe dise kina]
-  -- aejonno firebase get a user provided specific info te chole jabo ==> home page
-  -- and then usestate nesting hook nite hobe sob info er jonno 
-  -- and jodi emailverified hoi tahole seta true dekabe and false hole emailverified page e nea jabe
-  -- oke aeta return er div er bitore pass koren 
-  -- now email verified page design koren img hisebe {gif nen} and text nen : sob center e hobe main div
-  -- and btn nen ==> btn e link koren gmail inbox ke react link dea and target{_blank}
-  -- ekon email jodi verified na hoi tahole btn theke email e click korle inbox e nea jacce ,,
-  -- ekon email verified holo, kintu email je verfied holo seta to homepage ke janate hobe
-  -- mane home page jokon janbe email verified tokon se homepage e dokte dibe
-  -- seta korar jonno homepage er useeffect hook er dependeci [userinfo.emailverified] chole jaba
-  -- oke lastly ami cie email verified page e jokon jabe tokon name and email ta dekak
-  -- now aebar kaj holo homepage er design er homeleft and homeright aeta component 2ta home e nen
-  - home left e nav ase width newwar dorkar nai just h-90vh naw  and padding x and y naw
+    -- aejonno firebase get a user provided specific info te chole jabo ==> home page
+    -- and then usestate nesting hook nite hobe sob info er jonno
+    -- and jodi emailverified hoi tahole seta true dekabe and false hole emailverified page e nea jabe
+    -- oke aeta return er div er bitore pass koren
+    -- now email verified page design koren img hisebe {gif nen} and text nen : sob center e hobe main div
+    -- and btn nen ==> btn e link koren gmail inbox ke react link dea and target{\_blank}
+    -- ekon email jodi verified na hoi tahole btn theke email e click korle inbox e nea jacce ,,
+    -- ekon email verified holo, kintu email je verfied holo seta to homepage ke janate hobe
+    -- mane home page jokon janbe email verified tokon se homepage e dokte dibe
+    -- seta korar jonno homepage er useeffect hook er dependeci [userinfo.emailverified] chole jaba
+    -- oke lastly ami cie email verified page e jokon jabe tokon name and email ta dekak
+    -- now aebar kaj holo homepage er design er homeleft and homeright aeta component 2ta home e nen
+  - home left e nav ase width newwar dorkar nai just h-90vh naw and padding x and y naw
 
-  -- oke jodi kono side nav bar 1ta list ke active banate chan tahole just tare ekta active ={"home"} namok props patan then seta doren dore tar class name e mane li class name bolen {active==="home"?"taile design den oke ami cie bg-white hobe taile dekben tarpostion thik thakbo na just width use koren and flex common property use koren bass hoe gelo":"cursor-pointer"} === > next class 
+  -- oke jodi kono side nav bar 1ta list ke active banate chan tahole just tare ekta active ={"home"} namok props patan then seta doren dore tar class name e mane li class name bolen {active==="home"?"taile design den oke ami cie bg-white hobe taile dekben tarpostion thik thakbo na just width use koren and flex common property use koren bass hoe gelo":"cursor-pointer"} === > next class
 
   -- oke ami cie ami je regestration er somoy name dicci ta save hok taile lagbe realtime database
   -- go to firebase realtime database - web - firebaseconnect file e == import { getDatabase } from "firebase/database";
   and export const database = getDatabase(app);
   and now connect main firebase console realtime database
 
-  -- oke now regestration page e jokon usersuccesfully signin in korbe then verification mail patabe 
-  -- then username, useremail, password ami cie database e save rakte kibabe ? 
-  -- go to firebase authtication update user profile 
-  -- aeta bosan regestration e karon aekani ami cie user sob dile and mail patanor por data jabe realtime database e ,
-  
+  -- oke now regestration page e jokon usersuccesfully signin in korbe then verification mail patabe
+  -- then username, useremail, password ami cie database e save rakte kibabe ?
+  -- go to fdirebase authtication upate profile change and then seta observe kore onauthstatechange e
+  -- aeta bosan regestration e karon aekani ami cie user sob dile and mail patanor por data jabe realtime database e tar profile ta jabe setar jonno on
+
+            createUserWithEmailAndPassword(auth, Email, Password)
+                .then((userCredential) => {
+                    //console.log(userCredential);
+                     verification link ta patalam then  ==> 
+
+                    // update profile // value gula nilam
+                    updateProfile(auth.currentUser, {
+                    displayName: FullName,
+                    photoURL: null,
+                    })
+                    
+                    .then(() => {
+                        set(ref(db, "users/"), {
+                        username: auth.currentUser.displayName,
+                        email: auth.currentUser.email,
+                        });
+                    }).then(()=>{
+                        console.log("date send to real time database");
+                    })
+                    .catch((error) => {
+                        console.log(error.message);
+                    });
+                })
+                .catch((error) => {
+                    setloading(false);
+                    if (error.message === "Firebase: Error (auth/email-already-in-use).") {
+                    toast.warn("Email Already In Use", {
+                        position: "top-right",
+                        autoClose: 10000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "dark",
+                        transition: Bounce,
+                    });
+                    }
+                })
+                .finally(() => {
+                    setloading(false);
+                });
+    - Ekon problem holo useremail o nite parci and password o nite parci kintu barbar jokon
+    new user sign up hocce tokon noton kore use set hocce 
+    - kintu amr dorkar userlist ? 
+    - aejonno use push function push er bitore dea den example: 
+     dbref = ref(db, "users/")
+     push(dbref) // push func dbref er under e ekta id dea dibe protita new user er jonno . 
+     data base e data [patan]
+     
+                        let dbref = ref(db, "users/");
+                            set(push(dbref), {
+                                username: auth.currentUser.displayName,
+                                email: auth.currentUser.email,
+
+  -- nav left nav layout and use dom to routing  
+  -- lets move for HomeRight Page ==>
+  -- 
+  -- important branch add korte specific portion cie oi branch e add korte
+  --1st age ja korsen ta main e patan
+  -- then git branch branchName
+  -- git branch
+  -- git checkout branchName
+
+  --
 
 And Stay with me , Many thing will coming . This is a Big Project . 👁️ Keep Watching 👁️.

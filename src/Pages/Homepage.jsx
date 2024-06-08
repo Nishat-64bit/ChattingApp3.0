@@ -42,7 +42,7 @@ const Homepage = () => {
   return (
     <div>
       {userInfo.Emailverified ? (
-        <div className="flex py-4 px-4 ">
+        <div className="flex py-3 px-4 ">
           <HomeLeft active ={"home"}/>
           <HomeRight />
         </div>

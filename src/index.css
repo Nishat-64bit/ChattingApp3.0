@@ -66,12 +66,6 @@ img {
 }
 
 @layer components{
-  .custom-border{
-    border-right-width: 10px;
-    border-right-color: black;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
 .loader {
   width: 15px;
   aspect-ratio: .577;
