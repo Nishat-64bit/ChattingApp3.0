@@ -16,13 +16,14 @@ import {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-    <Route path='/' element={<RegestrationPages/>}/>  {/* add to root RegestrationPages */}
+    <Route path='/r' element={<RegestrationPages/>}/>  {/* add to root RegestrationPages */}
     <Route path='reg' element={<RegestrationPages/>}/>
     <Route path='login' element={<LoginPages/>}/>
-    <Route path='home' element={<Homepage/>}/>
-    <Route path='chat' element={<Chatpage/>}/>
-    <Route path='notification' element={<NotificationPage/>}/>
-    <Route path='setting' element={<SettingPage/>}/>
+    <Route  path='/' element={<Homepage/>}> {/* Home Page Parent start */}
+    <Route path='chat' element={<Chatpage/>}></Route>
+    <Route path='notification' element={<NotificationPage/>}></Route>
+    <Route path='setting' element={<SettingPage/>}></Route>
+    </Route>{/* Home Page Parent end */}
     <Route path='email-verify' element={<EmailVerified/>}/>
     <Route path='*' element = {<h1>Error page</h1>}/>
     {/* suppose  jodi amr contact page na theke tar por navigate korle Erro page leka  dekabe  */}

@@ -185,7 +185,31 @@ in this project I have learned many things
 
   -- nav left nav layout and use dom to routing  
   -- lets move for HomeRight Page ==>
-  -- 
+  -- import outlet component for sub section in homeRIght page
+  -- outlet create korte hole just homepage er under e ja page gula nisi sobieke nite hobe and home ke / dia rakte hobe .
+  --            
+
+                {/* Home Page Parent start */}
+                <Route  path='/' element={<Homepage/>}>  // link e / dia rakben 
+                <Route path='chat' element={<Chatpage/>}></Route>
+                <Route path='notification' element={<NotificationPage/>}></Route>
+                <Route path='setting' element={<SettingPage/>}></Route>
+                </Route>
+                {/* Home Page Parent end */}
+
+
+    -- ekon protita active ke dynamic koren function e bosie na , use kore uselocation() hook 
+    
+
+              //  location hook start // 
+
+                const location = useLocation()
+                const active = location.pathname.split("/")[1]   // jei page e thakben seta dekabe . 
+                //console.log(location.pathname.split("/")[1]);  // 1st e console kore niben then active e bosan .
+                //active ta ke amra dynamic korsi just use loction hook use kore. 
+
+                // location hook end //
+
   -- important branch add korte specific portion cie oi branch e add korte
   --1st age ja korsen ta main e patan
   -- then git branch branchName

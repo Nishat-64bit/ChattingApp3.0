@@ -1,9 +1,9 @@
 import React from 'react'
-
+import { Outlet } from 'react-router-dom'
 const HomeRight = () => {
   return (
-    <div>
-      <h1>this home right</h1>
+    <div className='bg-green-500 w-full rounded-xl'>
+      <Outlet/>
     </div>
   )
 }

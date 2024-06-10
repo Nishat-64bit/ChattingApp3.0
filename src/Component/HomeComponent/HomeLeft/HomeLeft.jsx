@@ -5,9 +5,16 @@ import message from "../../../assets/HOmeLeft/message.gif";
 import logout from "../../../assets/HOmeLeft/logout.gif";
 import { IoSettingsOutline } from "react-icons/io5";
 import { IoNotificationsOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link,useLocation } from "react-router-dom";
+const HomeLeft = () => {
+  //  location hook start // 
 
-const HomeLeft = ({ active }) => {
+  const location = useLocation()
+  const active = location.pathname.split("/")[1]
+  //console.log(location.pathname.split("/")[1]); 
+  //active ta ke amra dynamic korsi just use loction hook use kore. 
+
+  // location hook end //
   return (
     <div>
       <div className="bg-[#5F35F5] h-[96vh] px-7 py-[13px] rounded-xl">
@@ -26,7 +33,7 @@ const HomeLeft = ({ active }) => {
                   : "cursor-pointer"
               }
             >
-              <Link to={"/home"}>
+              <Link to={"/"}>
                 <img
                   src={home}
                   alt={home}
